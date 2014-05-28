@@ -93,6 +93,23 @@ table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {
 	dddd$ratio <- (dddd$finance / dddd$total) * 100
 	dddd
 }))
-table
+countries_fullNames <- c('Australia', 'Austria', 'European Union (28 countries)', 'Ireland', 'Japan', 'Luxembourg', 'Netherlands',
+	'China', 'Italy','Germany', 'France','Portugal','Spain','United Kingdom', 'Switzerland')
+
+table <- table[table$Country %in% countries_fullNames,]
+
+table$rratio <- round(table$ratio, 1)
+table$Country <- reorder(table$Country, table$rratio)
+table$color <- 'a'
+table[table$Country=="Switzerland",'color'] <- 'b'
+
+
+ggplot(table, aes(x = Country, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
+	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
+	theme(text=element_text(family=font , size=12), axis.ticks.y = element_blank()) + xlab("") +
+	geom_text(data=table,aes(label=as.character(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +
+	ylab("Contribution of the financial sector to the total GDP (output method) in %") +
+	theme(panel.background = element_rect(fill = '#f7f5ed'), plot.background=element_rect(fill="#f7f5ed"),
+	legend.position = "none", panel.border = element_blank())
 
 

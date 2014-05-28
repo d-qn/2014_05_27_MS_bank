@@ -52,7 +52,7 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
 * About 1/3 of these people are working for insurance companies <http://www.swissbanking.org/fr/mobile/facts_figures.htm>
 
 ##### Barchart countries
-  * The importance of the financial sector on job is indisputable, although countries like UK or US have financial sector nearly as important.
+  * The importance of the financial sector on job is indisputable, although countries like UK or US have workforce working  in financial services nearly as important.
   * Half of Luxembourg!
 
  
@@ -74,6 +74,6 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
     * D21_D31: Taxes less subsidies on products
     * DB1_GA: Statistical discrepancy
   * **1 measure: CPC: US $, current prices, current PPPs, millions**  
-    
+   
     
 
