@@ -1,0 +1,16 @@
+Activity,code,Job,Sector
+"Agriculture, hunting, forestry and fishing",00A,178,1
+Mining and Quarrying,03_,5,1
+Manufacturing,04_,711,2
+"Electricity, Gas and Water Supply",05_,25,3
+Construction,06_,307,3
+"Wholesale and Retail Trade; Repair of Motor Vehicles, Motorcycles and Personal and Household Goods",07_,671,3
+Hotels and Restaurants,08_,257,3
+"Transport, Storage and Communications",09_,280,3
+Financial Intermediation,10_,231,3
+"Real Estate, Renting and Business Activities",11_,565,3
+Public Administration and Defence; Compulsory Social Security,12_,189,3
+Education,13_,289,3
+Health and Social Work,14_,523,3
+"Other Community,Social and Personal Service Activities",15_,203,3
+Households with Employed Persons,16_,61,3

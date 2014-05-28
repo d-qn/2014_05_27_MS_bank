@@ -1,0 +1,92 @@
+COUNTRY,CODE COUNTRY,CODE SOURCE,CODE SUBJECT,CODE TYPE OF DATA,CODE WORKER COVERAGE,SEX,CODE SEX,CODE TABLE,CLASSIFICATION,CODE CLASSIFICATION,SUB-CLASSIFICATION,CODE SUB-CLASSIFICATION,year,value
+Austria,AT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,3928.3
+Austria,AT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,4027.9
+Austria,AT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,4089.986
+Austria,AT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,133.1
+Austria,AT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,135.1
+Austria,AT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,142.475
+Brazil,BR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,89318
+Brazil,BR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,90786.019
+Brazil,BR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,1071
+Brazil,BR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,1181.371
+China,CN,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,117132
+China,CN,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,120244
+China,CN,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,3674
+China,CN,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,3897
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,25133.5
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,25565.2
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,25913.2
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,807.4
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,826
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,793.3
+France,FR,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.4,I4,Total,00_,2008,25913.2
+Germany,DE,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,37322
+Germany,DE,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,38163
+Germany,DE,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,38734
+Germany,DE,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,1306
+Germany,DE,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,1303
+Germany,DE,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,1301
+Italy,IT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,22988
+Italy,IT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,23221.837
+Italy,IT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,23404.689
+Italy,IT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,675
+Italy,IT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,664.47
+Italy,IT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,653.26
+Japan,JP,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,63820
+Japan,JP,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,64120
+Japan,JP,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,63850
+Japan,JP,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,1550
+Japan,JP,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,1550
+Japan,JP,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,1640
+Luxembourg,LU,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,319.1
+Luxembourg,LU,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,333.2
+Luxembourg,LU,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,348.7
+Luxembourg,LU,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,36.4
+Luxembourg,LU,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,38.4
+Luxembourg,LU,E,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,41.3
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,5159.5
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,5169.7
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,5197.8
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,90.1
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,95.7
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,96.1
+Portugal,PT,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.4,I4,Total,00_,2008,5197.8
+Russian Federation,RU,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,68855
+Russian Federation,RU,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,70570
+Russian Federation,RU,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,70965
+Russian Federation,RU,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,1060
+Russian Federation,RU,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,1249
+Russian Federation,RU,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,1316
+Saudi Arabia,SA,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,7522.984
+Saudi Arabia,SA,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,7755.397
+Saudi Arabia,SA,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,7987.066
+Saudi Arabia,SA,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,86.571
+Saudi Arabia,SA,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,81.6555
+Saudi Arabia,SA,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,87.669
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,1796.7
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,1803.2
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,1852
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,106.3
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,109.7
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,123.6
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.4,I4,Total,00_,2006,1796.7
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.4,I4,Total,00_,2007,1803.2
+Singapore,SG,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.4,I4,Total,00_,2008,1852
+Switzerland,CH,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,4051
+Switzerland,CH,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,4122
+Switzerland,CH,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,4229
+Switzerland,CH,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,231
+Switzerland,CH,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,238
+Switzerland,CH,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,244
+United Kingdom,GB,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,28926
+United Kingdom,GB,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,29100
+United Kingdom,GB,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,29475
+United Kingdom,GB,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,1253
+United Kingdom,GB,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,1263
+United Kingdom,GB,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,1279
+United States,US,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2006,144427
+United States,US,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2007,146047
+United States,US,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,Total,00_,2008,145362
+United States,US,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2006,7254
+United States,US,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2007,7306
+United States,US,BA,2E,2X,21,Total men and women,2A,2B,ISIC-Rev.3,I3,J Financial Intermediation,10_,2008,7279

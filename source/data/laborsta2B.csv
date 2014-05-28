@@ -1,0 +1,19 @@
+Activity,Job,Sector
+"A Agriculture, Hunting and Forestry",126.705,1
+B Fishing,0.383,1
+C Mining and Quarrying,4.282,1
+D Manufacturing,581.547,2
+"E Electricity, Gas and Water Supply",21.841,2
+F Construction,239.756,2
+"G Wholesale and Retail Trade; Repair of Motor Vehicles, Motorcycles and Personal and Household Goods",539.041,3
+H Hotels and Restaurants,174.973,3
+"I Transport, Storage and Communications",203.199,3
+J Financial Intermediation,199.968,3
+"K Real Estate, Renting and Business Activities",344.503,3
+L Public Administration and Defence; Compulsory Social Security,144.353,3
+M Education,192.724,3
+N Health and Social Work,332.417,3
+"O Other Community,Social and Personal Service Activities",135.923,3
+P Households with Employed Persons,0.012,3
+Q ExtraﾬTerritorial Organizations and Bodies,8.593,3
+X Not classifiable by economic activity,539.196,3

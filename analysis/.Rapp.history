@@ -1,0 +1,60 @@
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_12_MS_bank/analysis')
+#############################################################################################
+###		SETTINGS#
+#############################################################################################
+#
+source("~/swissinfo/_helpers/helpers.R")#
+font <- "Archivo Narrow"#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Remove leading char in job activity and and line breaks#
+data.ch$Activity <- factor(factivity)#
+data.ch$Activity <- factor(sapply(factivity, function(ac) {#
+	if(nchar(ac) > 20) {#
+		gsub('(.{1,20})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_12_MS_bank/analysis')
+#############################################################################################
+###		SETTINGS#
+#############################################################################################
+#
+source("~/swissinfo/_helpers/helpers.R")#
+font <- "Archivo Narrow"#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Remove leading char in job activity and and line breaks#
+data.ch$Activity <- factor(factivity)#
+data.ch$Activity <- factor(sapply(factivity, function(ac) {#
+	if(nchar(ac) > 20) {#
+		gsub('(.{1,20})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_12_MS_bank/analysis')
+#############################################################################################
+###		SETTINGS#
+#############################################################################################
+#
+source("~/swissinfo/_helpers/helpers.R")#
+font <- "Archivo Narrow"#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")
+data.ch
