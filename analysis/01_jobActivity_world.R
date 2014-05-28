@@ -63,11 +63,36 @@ table[table$COUNTRY=="Switzerland",'color'] <- 'b'
 # n1$chart(staggerLabels = T)
 # n1
 
-
 ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(5,9)]) +
+	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
 	theme(text=element_text(family=font , size=12), axis.ticks.y = element_blank()) + xlab("") +
 	geom_text(data=table,aes(label=as.character(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +
 	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +
-	theme(panel.background = element_rect(fill = '#f7f5ed'), plot.background=theme_rect(fill="#f7f5ed"),
-	legend.position = "none")
+	theme(panel.background = element_rect(fill = '#f7f5ed'), plot.background=element_rect(fill="#f7f5ed"),
+	legend.position = "none", panel.border = element_blank())
+
+
+############################################################################################
+### GDP composition
+############################################################################################
+
+data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv")
+
+# split the data by country and return the ratio of job in finance  for the latest year available
+table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {
+	browser()
+	dd$Transaction=="Domestic demand"
+
+	year <- max(dd$Time)
+	ddd <- dd[dd$Time == year,]
+
+
+	# dddd <- cbind(ddd[1,c(1:2)], year = year, total = ddd[ddd$CODE.SUB.CLASSIFICATION == "00_",'value'], finance =
+	# 	ddd[ddd$CODE.SUB.CLASSIFICATION == "10_",'value'])
+	#
+	# dddd$ratio <- (dddd$finance / dddd$total) * 100
+	# dddd
+}))
+table
+
+
