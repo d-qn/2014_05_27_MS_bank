@@ -76,22 +76,22 @@ ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(f
 ### GDP composition
 ############################################################################################
 
-data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv")
+data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv", sep="\t")
+colnames(data.table)[6] <- 'value'
+data.table$value <- as.numeric(gsub(" +", "", as.character(data.table$value)))
 
 # split the data by country and return the ratio of job in finance  for the latest year available
 table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {
-	browser()
-	dd$Transaction=="Domestic demand"
-
+	cat("\n", as.character(dd[1,1]))
 	year <- max(dd$Time)
 	ddd <- dd[dd$Time == year,]
+	#browser()
+	dddd <- data.frame(Country = as.character(ddd[1,1]), year = year,
+		total = ddd[ddd$Transaction == "Gross domestic product (output approach)",'value'],
+		finance =ddd[ddd$Transaction == "Financial and insurance activities (ISIC rev4)",'value'])
 
-
-	# dddd <- cbind(ddd[1,c(1:2)], year = year, total = ddd[ddd$CODE.SUB.CLASSIFICATION == "00_",'value'], finance =
-	# 	ddd[ddd$CODE.SUB.CLASSIFICATION == "10_",'value'])
-	#
-	# dddd$ratio <- (dddd$finance / dddd$total) * 100
-	# dddd
+	dddd$ratio <- (dddd$finance / dddd$total) * 100
+	dddd
 }))
 table
 
