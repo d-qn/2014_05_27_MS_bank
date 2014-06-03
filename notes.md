@@ -1,9 +1,4 @@
-### suisse factcheck - Est-ce que la Suisse est le pays des banques? 
-
-
-#### Données
-
-<http://www.swissbanking.org/fr/mobile/facts_figures.htm>
+# suisse factcheck - Est-ce que la Suisse est le pays des banques? 
 
 
 
@@ -18,8 +13,10 @@
 
 * En terme de capitalisation boursière, les banques suisses font pâle figure au niveau mondial. UBS et Crédit Suisse ne se hissent qu'à la X et Y places.
 * En considérant les assureurs: ...
-* asset under management banque suisses
-* Nombre de banques privées, HNWI
+* There is one area of financial sercives, where Switzerland is the worldwide leader: private banking (wealth mangagement)
+* private bank, asset under management banque suisses, GDP equivalent
+* Nombre de banques privées, market cap
+* 
 
 
 
@@ -30,6 +27,9 @@
 
 #### Txt
 
+Jobs associated with a country are not legion. Yet everybody has heard of the traditional 'swiss banker'. Whether it is in the news, books or movies, swiss banks are all over the place. If the bank secrecy under fire. Is the stereotype of Switzerland country of banks nevertheless well-deserved? The answer with data.
+
+
 Les professions associées à une nationalité ne sont pas légion, tout le monde a pourtant entendu parlé du traditionel banquier suisse. Si les banques suisses ont comme spécificité le vivement critqué secret bancaire . Le cliché de la Suisse pays des banques est-il néanmoins mérité? La réponse par les chiffres.
 
 
@@ -39,20 +39,28 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
 * Top Bank / insurance companies in the world by market cap <http://www.relbanks.com/worlds-top-banks/market-cap>
 * Range of activities of "bank": _Activities undertaken by large banks include investment banking, corporate banking, private banking, insurance, consumer finance, foreign exchange trading, commodity trading, trading in equities, futures and options trading and money market trading_ <http://en.wikipedia.org/wiki/Bank>
 * Asset under management: <http://tcpgroup.ch/onbilder/Bank%20Survey%20Switzerland%20-%20AuM_2013.pdf>
+* <http://www.swissbanking.org/fr/mobile/facts_figures.htm>
+* [wealthmanagementp20](http://www.mediadesk.uzh.ch/articles/2013/schweizer-private-banking-kaempft-gegen-hohe-kosten/Private_Banking_Study_2013.pdf)
 
+#### SWI links
+
+* <http://www.swissinfo.ch/fre/economie/L_avenir_des_banquiers_prives_sous_la_loupe.html?cid=35035000>
 
 
 ## Charts
 
 ##### Treemap CH
   
-   * Financial Intermediation: banks, private equity, venture capital funds, leasing companies, insurance and pension funds, and micro-credit providers.
+* Banks and employment - How prevalent really is the swiss banker? The graphic under represents all the jobs in Switzerland by economic divisions in 2008, areas are proportional to the number of jobs.    
+* In the previous chart, there is no specific category for just the swiss bankers, but 'Financial Intermediation' cover all jobs in financial services: banks, insurance and pension funds
    * data 2008 ILO Official estimates <http://laborsta.ilo.org/STP/guest>
-* 1 / 17 working for financial services (not only bankers!)
-* About 1/3 of these people are working for insurance companies <http://www.swissbanking.org/fr/mobile/facts_figures.htm>
+* So out of the total swiss workforce, a mere 5.7% works in financial services, that is 1 out 17 people. A workforce somewhat inferior to the education or the hospitality industry. 
+ * Out of these people about 1/3 of are working for insurance companies <http://www.swissbanking.org/fr/mobile/facts_figures.htm>
 
 ##### Barchart countries
-  * The importance of the financial sector on job is indisputable, although countries like UK or US have workforce working  in financial services nearly as important.
+
+ * How does Switzerland's jobs in financial services compare with other countries?    
+ * Countries like UK or US have workforce working in financial services nearly as important.
   * Half of Luxembourg!
 
  
@@ -76,4 +84,9 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
   * **1 measure: CPC: US $, current prices, current PPPs, millions**  
    
     
+#### Ranking swiss banks and insurers
 
+
+#####
+
+The term "private" refers to customer service rendered on a more personal basis than in mass-market retail banking, usually via dedicated bank advisers. It does not refer to a private bank, which is a non-incorporated banking institution.
