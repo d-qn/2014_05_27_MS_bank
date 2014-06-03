@@ -43,6 +43,10 @@ dev.off()
 
 data.table <- read.csv("laborsta2B-refined-csv.csv")
 
+# discard Luxembourg
+data.table <- data.table[data.table[,2] != 'LU',]
+
+
 # split the data by country and return the ratio of job in finance intermediation for the latest year available
 
 table <- do.call(rbind, by(data.table, data.table$COUNTRY, function(dd) {
@@ -97,7 +101,7 @@ table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {
 	dddd$ratio <- (dddd$finance / dddd$total) * 100
 	dddd
 }))
-countries_fullNames <- c('Australia', 'Austria', 'European Union (28 countries)', 'Ireland', 'Japan', 'Luxembourg', 'Netherlands',
+countries_fullNames <- c('Australia', 'Austria', 'European Union (28 countries)', 'Ireland', 'Japan', 'Netherlands',
 	'China', 'Italy','Germany', 'France','Portugal','Spain','United Kingdom', 'Switzerland')
 
 table <- table[table$Country %in% countries_fullNames,]
