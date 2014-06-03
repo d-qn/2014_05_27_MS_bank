@@ -39,6 +39,7 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
 * Top Bank / insurance companies in the world by market cap <http://www.relbanks.com/worlds-top-banks/market-cap>
 * Range of activities of "bank": _Activities undertaken by large banks include investment banking, corporate banking, private banking, insurance, consumer finance, foreign exchange trading, commodity trading, trading in equities, futures and options trading and money market trading_ <http://en.wikipedia.org/wiki/Bank>
 * Asset under management: <http://tcpgroup.ch/onbilder/Bank%20Survey%20Switzerland%20-%20AuM_2013.pdf>
+* <http://www.swissbanking.org/fr/mobile/20131025-2400-vermoegensverwaltungsstudie_web-awe-rva.pdf>
 * <http://www.swissbanking.org/fr/mobile/facts_figures.htm>
 * [wealthmanagementp20](http://www.mediadesk.uzh.ch/articles/2013/schweizer-private-banking-kaempft-gegen-hohe-kosten/Private_Banking_Study_2013.pdf)
 

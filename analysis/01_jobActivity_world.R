@@ -5,6 +5,8 @@
 source("~/swissinfo/_helpers/helpers.R")
 font <- "Archivo Narrow"
 
+widthFig <- 1500
+heightFig <- 1000
 
 ############################################################################################
 ### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by
@@ -24,9 +26,10 @@ data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {
 }))
 
 # Clustering by sector
-pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)
+png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)
+#pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)
 treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,4,6)],
-fontsize.labels=c(0, 20),   fontsize.title = 27,
+fontsize.labels=c(0, 26),   fontsize.title = 33,
 	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland, their repartition by economic activity"),
 	fontfamily.title = font, fontfamily.labels = font)
 dev.off()
@@ -63,14 +66,13 @@ table[table$COUNTRY=="Switzerland",'color'] <- 'b'
 # n1$chart(staggerLabels = T)
 # n1
 
-pdf("jobInFinance_bar.pdf", width = 13, height = 10)
+png("jobInFinance_bar.png", width = widthFig, height = heightFig)
 p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
 	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
-	theme(text=element_text(family=font , size=12), axis.ticks.y = element_blank()) + xlab("") +
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +
+	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +
+	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
 	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +
-	theme(panel.background = element_rect(fill = '#f7f5ed'), plot.background=element_rect(fill="#f7f5ed"),
-	legend.position = "none", panel.border = element_blank())
+	theme(legend.position = "none", panel.border = element_blank())
 p1
 dev.off()
 
@@ -105,14 +107,13 @@ table$Country <- reorder(table$Country, table$rratio)
 table$color <- 'a'
 table[table$Country=="Switzerland",'color'] <- 'b'
 
-pdf("financeInGDP_bar.pdf", width = 13, height = 10)
+png("financeInGDP_bar.png", width = widthFig, height = heightFig)
 p2 <- ggplot(table, aes(x = Country, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
 	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
-	theme(text=element_text(family=font , size=12), axis.ticks.y = element_blank()) + xlab("") +
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +
+	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +
+	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
 	ylab("Contribution of the financial sector to the total GDP (output method) in %") +
-	theme(panel.background = element_rect(fill = '#f7f5ed'), plot.background=element_rect(fill="#f7f5ed"),
-	legend.position = "none", panel.border = element_blank())
+	theme(legend.position = "none", panel.border = element_blank())
 p2
 dev.off()
 
