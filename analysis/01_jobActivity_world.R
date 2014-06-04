@@ -5,8 +5,8 @@
 source("~/swissinfo/_helpers/helpers.R")
 font <- "Archivo Narrow"
 
-widthFig <- 1500
-heightFig <- 1000
+widthFig <- 1000
+heightFig <- 1500
 
 ############################################################################################
 ### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by
@@ -122,12 +122,24 @@ p2
 dev.off()
 
 ############################################################################################
-### GDP composition
+### Market cap banks
 ############################################################################################
 
-library(quantmod)
+# library(quantmod)
+# banks <- c('WFC', 'UBS', 'CS')
+# getQuote(banks, what = yahooQF(c("Market Capitalization")))
+# sapply(banks, function(b) getFinancials(b, "IS", "A"))
 
 
-banks <- c('WFC', 'UBS', 'CS')
-getQuote(banks, what = yahooQF(c("Market Capitalization")))
-sapply(banks, function(b) getFinancials(b, "IS", "A"))
+mkcap <- read.csv("banks_byMarketCap.csv")
+mkcap <- mkcap[1:20,]
+mkcap$Bank <- reorder(mkcap$Bank, mkcap$Market.cap)
+
+p3 <- ggplot(mkcap, aes(x = Bank, y =  Market.cap)) + geom_bar(stat = "identity", aes(fill = Country)) +
+	ggtheme_ygrid + scale_fill_manual(values = swi_22palette[1:nlevels(mkcap$Country)]) +
+	theme(text=element_text(family=font , size = 10), axis.ticks.y = element_blank()) + xlab("") +
+	ylab("The larget bank by market capitalisation in 2013 [USD billions]") +
+	geom_text(data=mkcap,aes(x = 0, label=format(Market.cap)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
+	theme(panel.border = element_blank())
+p3
+

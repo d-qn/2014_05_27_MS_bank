@@ -9,13 +9,12 @@
 * Treemap emploi en suisse
 * % emploi finance vs autres pays
 * % GDP finance vs autres pays
-
-
 * En terme de capitalisation boursière, les banques suisses font pâle figure au niveau mondial. UBS et Crédit Suisse ne se hissent qu'à la X et Y places.
 * En considérant les assureurs: ...
 * There is one area of financial sercives, where Switzerland is the worldwide leader: private banking (wealth mangagement)
 * private bank, asset under management banque suisses, GDP equivalent
 * Nombre de banques privées, market cap
+* Infographie activité d'une banque?
 * 
 
 
@@ -91,3 +90,6 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
 #####
 
 The term "private" refers to customer service rendered on a more personal basis than in mass-market retail banking, usually via dedicated bank advisers. It does not refer to a private bank, which is a non-incorporated banking institution.
+
+
+
