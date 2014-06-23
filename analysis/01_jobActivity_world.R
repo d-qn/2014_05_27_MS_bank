@@ -5,8 +5,8 @@
 source("~/swissinfo/_helpers/helpers.R")
 font <- "Archivo Narrow"
 
-widthFig <- 1000
-heightFig <- 1500
+widthFig <- 640 * 2
+heightFig <- widthFig * 2/3
 
 ############################################################################################
 ### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by
@@ -28,13 +28,11 @@ data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {
 # Clustering by sector
 png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)
 #pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)
-treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,4,6)],
-fontsize.labels=c(0, 26),   fontsize.title = 33,
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland, their repartition by economic activity"),
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],
+fontsize.labels=c(0, 29),   fontsize.title = 33, border.lwds = c(2,3), border.col = "#efe9e0",
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),
 	fontfamily.title = font, fontfamily.labels = font)
 dev.off()
-
-
 
 
 ############################################################################################
@@ -64,11 +62,6 @@ table$COUNTRY <- reorder(table$COUNTRY, table$rratio)
 table$color <- 'a'
 table[table$COUNTRY=="Switzerland",'color'] <- 'b'
 
-# rCharts - NVD3
-# n1 <- nPlot(rratio ~ COUNTRY, data = table, type = 'discreteBarChart')
-# n1$chart(color = swi_22palette)
-# n1$chart(staggerLabels = T)
-# n1
 
 png("jobInFinance_bar.png", width = widthFig, height = heightFig)
 p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
@@ -79,6 +72,8 @@ p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity",
 	theme(legend.position = "none", panel.border = element_blank())
 p1
 dev.off()
+
+write.table(table, "jobInFinance.csv", sep = ",")
 
 ############################################################################################
 ### GDP composition
@@ -121,25 +116,64 @@ p2 <- ggplot(table, aes(x = Country, y =  rratio)) + geom_bar(stat = "identity",
 p2
 dev.off()
 
+write.table(table, "financeInGDP.csv", sep = ",")
+
+
+###### Bank asset to GDP ########
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
+countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',
+'United Kingdom', 'Switzerland', 'Russia')
+
+
+data.table<- data.table[data.table$Countries %in% countries_fullNames2,]
+
+dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {
+	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]
+	#browser()
+	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))
+}))
+
+write.table(table, "asset2GDP.csv", sep = ",")
+
+
+
 ############################################################################################
-### Market cap banks
+### Bank capital to assets ratio : WDI FB.BNK.CAPA.ZS
 ############################################################################################
+# The ratio of capital to assets measures bank solvency and resiliency— and the extent to which banks can deal with unexpected losses. With banks under stress in the global financial crisis, the likelihood and cost of bank failures led countries to review their banking regulations. Many major economies have required higher minimum capital ratios to ensure bank capacity to cover liabilities and protect depositors and other lenders. In the United States the average ratio of capital to assets rose to 11.2 percent in 2011, up from 9.3 percent in 2008. Also maintaining higher ratios were euro area countries (6.7 percent) and the United Kingdom (5.1 percent). Japan and Germany, by con- trast, kept rates below 5 percent because of their banking conditions.
 
-# library(quantmod)
-# banks <- c('WFC', 'UBS', 'CS')
-# getQuote(banks, what = yahooQF(c("Market Capitalization")))
-# sapply(banks, function(b) getFinancials(b, "IS", "A"))
+#
+# library(WDI)
+#
+# countries.iso2 <- c('AT', "CH", "DE", "GR", "ES", "FR", "IT", "PT", "GB", "US", 'JP', 'BR', 'RU', 'CN')
+#
+#
+# bankRatio <- WDI(country = c(countries.iso2), indicator = "FB.BNK.CAPA.ZS",
+#   start = 1991,  end = 2012, extra = FALSE, cache = NULL)
+#
+# #Clean up the data a bit
+# bankRatio <- rename(bankRatio, replace = c("SL.UEM.1524.ZS" = "unemployment"))
+# bankRatio$unemployment <- round(bankRatio$unemployment, 1)
+#
+#
+# # Create the chart
+# bankRatioPlot <- nPlot(
+# 	unemployment ~ year,
+# 	data = bankRatio,
+# 	group = "country",
+# 	type = "lineChart")
+#
+# # Add axis labels and format the tooltip
+# bankRatioPlot$yAxis(axisLabel = "Youth (age 15-24) unemployement in %", width = 55)
+# bankRatioPlot$xAxis(axisLabel = "Year")
+# bankRatioPlot$chart(tooltipContent = "#! function(key, x, y){
+#       return '<h3>' + key + '</h3>' +
+#       '<p>' + y + ' in ' + x + '</p>'
+#       } !#")
+# ids <- unique(bankRatio$iso2c)
+# country.selec <- as.logical(!ids %in% c('AT','CH','DE','ES','PT','GB', 'GR'))
+# bankRatioPlot$set(disabled = country.selec)
+# bankRatioPlot$publish("line chart World Bank youth unemployment", host = "rpubs")
+# bankRatioPlot
 
-
-mkcap <- read.csv("banks_byMarketCap.csv")
-mkcap <- mkcap[1:20,]
-mkcap$Bank <- reorder(mkcap$Bank, mkcap$Market.cap)
-
-p3 <- ggplot(mkcap, aes(x = Bank, y =  Market.cap)) + geom_bar(stat = "identity", aes(fill = Country)) +
-	ggtheme_ygrid + scale_fill_manual(values = swi_22palette[1:nlevels(mkcap$Country)]) +
-	theme(text=element_text(family=font , size = 10), axis.ticks.y = element_blank()) + xlab("") +
-	ylab("The larget bank by market capitalisation in 2013 [USD billions]") +
-	geom_text(data=mkcap,aes(x = 0, label=format(Market.cap)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
-	theme(panel.border = element_blank())
-p3
 

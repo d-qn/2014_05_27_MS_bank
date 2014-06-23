@@ -6,72 +6,26 @@ setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 source("~/swissinfo/_helpers/helpers.R")#
 font <- "Archivo Narrow"#
 #
-widthFig <- 1200#
-heightFig <- 800#
+widthFig <- 640 * 2#
+heightFig <- widthFig * 2/3#
 #
 #############################################################################################
-### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
-#############################################################################################
-library(treemap)#
-#
-data.ch <- read.csv("laborsta2B_prod.csv")#
-#
-#Add line breaks#
-#
-data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
-	if(nchar(ac) > 30) {#
-		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
-	}	else {#
-		ac#
-	}#
-}))#
-#
-# Clustering by sector#
-png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
-#pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)#
-treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,4,6)],#
-fontsize.labels=c(0, 24),   fontsize.title = 30,#
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland, their repartition by economic activity"),#
-	fontfamily.title = font, fontfamily.labels = font)#
-dev.off()#
-#############################################################################################
-### Compare percentage of population working in finance vs different countries#
+### Market cap banks#
 #############################################################################################
 #
-data.table <- read.csv("laborsta2B-refined-csv.csv")#
-#
-# split the data by country and return the ratio of job in finance intermediation for the latest year available#
-#
-table <- do.call(rbind, by(data.table, data.table$COUNTRY, function(dd) {#
-	year <- max(dd$year)#
-	ddd <- dd[dd$year == year & dd$CLASSIFICATION == 'ISIC-Rev.3',]#
-#
-	dddd <- cbind(ddd[1,c(1:2)], year = year, total = ddd[ddd$CODE.SUB.CLASSIFICATION == "00_",'value'], finance =#
-		ddd[ddd$CODE.SUB.CLASSIFICATION == "10_",'value'])#
-#
-	dddd$ratio <- (dddd$finance / dddd$total) * 100#
-	dddd#
-}))#
-table$rratio <- round(table$ratio, 1)#
-table$COUNTRY <- reorder(table$COUNTRY, table$rratio)#
-table$color <- 'a'#
-table[table$COUNTRY=="Switzerland",'color'] <- 'b'#
-#
-# rCharts - NVD3#
-# n1 <- nPlot(rratio ~ COUNTRY, data = table, type = 'discreteBarChart')#
-# n1$chart(color = swi_22palette)#
-# n1$chart(staggerLabels = T)#
-# n1#
-#
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size=15), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()
+library(quantmod)#
+banks <- c('WFC', 'UBS', 'CS', 'CNY')#
+getQuote(banks, what = yahooQF(c("Market Capitalization")))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+mc <- read.csv("banks_byMarketCap.csv")#
+as <- read.csv("banks_byAsset.csv")
+mc
+as
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+mc$Bank
+as$Bank
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+levels(mc$Bank) %in% levels(as$Bank)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 #############################################################################################
 ###		SETTINGS#
@@ -80,112 +34,72 @@ setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 source("~/swissinfo/_helpers/helpers.R")#
 font <- "Archivo Narrow"#
 #
-widthFig <- 1500#
-heightFig <- 1000#
+widthFig <- 640 * 2#
+heightFig <- widthFig * 2/3#
 #
 #############################################################################################
-### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
-#############################################################################################
-library(treemap)#
-#
-data.ch <- read.csv("laborsta2B_prod.csv")#
-#
-#Add line breaks#
-#
-data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
-	if(nchar(ac) > 30) {#
-		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
-	}	else {#
-		ac#
-	}#
-}))#
-#
-# Clustering by sector#
-png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
-#pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)#
-treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,4,6)],#
-fontsize.labels=c(0, 24),   fontsize.title = 30,#
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland, their repartition by economic activity"),#
-	fontfamily.title = font, fontfamily.labels = font)#
-dev.off()#
-#############################################################################################
-### Compare percentage of population working in finance vs different countries#
+### Market cap banks#
 #############################################################################################
 #
-data.table <- read.csv("laborsta2B-refined-csv.csv")#
-#
-# split the data by country and return the ratio of job in finance intermediation for the latest year available#
-#
-table <- do.call(rbind, by(data.table, data.table$COUNTRY, function(dd) {#
-	year <- max(dd$year)#
-	ddd <- dd[dd$year == year & dd$CLASSIFICATION == 'ISIC-Rev.3',]#
-#
-	dddd <- cbind(ddd[1,c(1:2)], year = year, total = ddd[ddd$CODE.SUB.CLASSIFICATION == "00_",'value'], finance =#
-		ddd[ddd$CODE.SUB.CLASSIFICATION == "10_",'value'])#
-#
-	dddd$ratio <- (dddd$finance / dddd$total) * 100#
-	dddd#
-}))#
-table$rratio <- round(table$ratio, 1)#
-table$COUNTRY <- reorder(table$COUNTRY, table$rratio)#
-table$color <- 'a'#
-table[table$COUNTRY=="Switzerland",'color'] <- 'b'#
-#
-# rCharts - NVD3#
-# n1 <- nPlot(rratio ~ COUNTRY, data = table, type = 'discreteBarChart')#
-# n1$chart(color = swi_22palette)#
-# n1$chart(staggerLabels = T)#
-# n1#
-#
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size=18), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()
+data <- read.csv("bank_marketCapAsset_refined.csv")
+data
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size=22), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()
+mc <- data[data$Value == "marketCap",]
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 3.5, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()
+as <- data[data$Value == "asset",]
+str(as)
+str(mc)
+as
+mc
+as
+levels(mc$Bank) %in% levels(as$Bank)
+levels(as$Bank) %in% levels(mc$Bank)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 6.5, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()
+mc$Bank <- factor(mc$Bank)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()
+data <- read.csv("bank_marketCapAsset_refined.csv")#
+#
+mc <- data[data$Value == "marketCap",]#
+mc$Bank <- factor(mc$Bank)#
+as <- data[data$Value == "asset",]#
+as$Bank <- factor(as$Bank)
+levels(mc$Bank) %in% levels(as$Bank)
+head(as)
+head(mc)
+levels(mc$Bank)
+levels(as$Bank)
+mc$Bank %in% as$Bank
+mc[mc$Bank %in% as$Bank,]
+mc[!mc$Bank %in% as$Bank,]
+as$Bank %in% ms$Bank
+as$Bank %in% mc$Bank
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+dat <- mc[mc$Bank %in% as$Bank,]
+dat
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+match(dat$Bank, as$Bank)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+cbind(dat, as$Bank[match(dat$Bank, as$Bank),])
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+as$Bank[match(dat$Bank, as$Bank),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+as$Bank[match(dat$Bank, as$Bank),]
+as$Bank[match(dat$Bank, as$Bank)]
+as[match(dat$Bank, as$Bank),]
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+cbind(dat, as[match(dat$Bank, as$Bank),])
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+cbind(dat, asset = as[match(dat$Bank, as$Bank),'US.b'])
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+dat <- cbind(dat, asset = as[match(dat$Bank, as$Bank),'US.b'])
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+ggplot(data =dat) + geom_point(aes(`US.b`, asset, color = Country))
+(271 + 152) / 1350
+(155 - 174) / 174
+((155 - 174) / 174) * 100
+1085 / 2309
+1085 / 7227
+ggplot(data =dat) + geom_point(aes(`US.b`, asset, color = Country))
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 #############################################################################################
 ###		SETTINGS#
@@ -194,8 +108,8 @@ setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 source("~/swissinfo/_helpers/helpers.R")#
 font <- "Archivo Narrow"#
 #
-widthFig <- 1500#
-heightFig <- 1000#
+widthFig <- 640 * 2#
+heightFig <- widthFig * 2/3#
 #
 #############################################################################################
 ### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
@@ -217,123 +131,31 @@ data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {
 # Clustering by sector#
 png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
 #pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)#
-treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,4,6)],#
-fontsize.labels=c(0, 24),   fontsize.title = 30,#
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland, their repartition by economic activity"),#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 33,#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
 	fontfamily.title = font, fontfamily.labels = font)#
-dev.off()#
-#############################################################################################
-### Compare percentage of population working in finance vs different countries#
-#############################################################################################
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+ata.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
 #
-data.table <- read.csv("laborsta2B-refined-csv.csv")#
-#
-# split the data by country and return the ratio of job in finance intermediation for the latest year available#
-#
-table <- do.call(rbind, by(data.table, data.table$COUNTRY, function(dd) {#
-	year <- max(dd$year)#
-	ddd <- dd[dd$year == year & dd$CLASSIFICATION == 'ISIC-Rev.3',]#
-#
-	dddd <- cbind(ddd[1,c(1:2)], year = year, total = ddd[ddd$CODE.SUB.CLASSIFICATION == "00_",'value'], finance =#
-		ddd[ddd$CODE.SUB.CLASSIFICATION == "10_",'value'])#
-#
-	dddd$ratio <- (dddd$finance / dddd$total) * 100#
-	dddd#
-}))#
-table$rratio <- round(table$ratio, 1)#
-table$COUNTRY <- reorder(table$COUNTRY, table$rratio)#
-table$color <- 'a'#
-table[table$COUNTRY=="Switzerland",'color'] <- 'b'#
-#
-# rCharts - NVD3#
-# n1 <- nPlot(rratio ~ COUNTRY, data = table, type = 'discreteBarChart')#
-# n1$chart(color = swi_22palette)#
-# n1$chart(staggerLabels = T)#
-# n1#
-#
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)#
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +#
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p1#
-dev.off()#
-#
-#############################################################################################
-### GDP composition#
-#############################################################################################
-#
-data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv", sep="\t")#
-colnames(data.table)[6] <- 'value'#
-data.table$value <- as.numeric(gsub(" +", "", as.character(data.table$value)))#
-#
-# split the data by country and return the ratio of job in finance  for the latest year available#
-table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {#
-	cat("\n", as.character(dd[1,1]))#
-	year <- max(dd$Time)#
-	ddd <- dd[dd$Time == year,]#
+dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
+	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
 	#browser()#
-	dddd <- data.frame(Country = as.character(ddd[1,1]), year = year,#
-		total = ddd[ddd$Transaction == "Gross domestic product (output approach)",'value'],#
-		finance =ddd[ddd$Transaction == "Financial and insurance activities (ISIC rev4)",'value'])#
-#
-	dddd$ratio <- (dddd$finance / dddd$total) * 100#
-	dddd#
-}))#
-countries_fullNames <- c('Australia', 'Austria', 'European Union (28 countries)', 'Ireland', 'Japan', 'Luxembourg', 'Netherlands',#
-	'China', 'Italy','Germany', 'France','Portugal','Spain','United Kingdom', 'Switzerland')#
-#
-table <- table[table$Country %in% countries_fullNames,]#
-#
-table$rratio <- round(table$ratio, 1)#
-table$Country <- reorder(table$Country, table$rratio)#
-table$color <- 'a'#
-table[table$Country=="Switzerland",'color'] <- 'b'#
-#
-png("financeInGDP_bar.png", width = widthFig, height = heightFig)#
-p2 <- ggplot(table, aes(x = Country, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +#
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +#
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +#
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +#
-	ylab("Contribution of the financial sector to the total GDP (output method) in %") +#
-	theme(legend.position = "none", panel.border = element_blank())#
-p2#
-dev.off()
+	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
+}))
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-#############################################################################################
-###		SETTINGS#
-#############################################################################################
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
 #
-source("~/swissinfo/_helpers/helpers.R")#
-font <- "Archivo Narrow"#
-#
-widthFig <- 1500#
-heightFig <- 1000#
-#
-#############################################################################################
-### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
-#############################################################################################
-library(treemap)#
-#
-data.ch <- read.csv("laborsta2B_prod.csv")#
-#
-#Add line breaks#
-#
-data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
-	if(nchar(ac) > 30) {#
-		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
-	}	else {#
-		ac#
-	}#
-}))#
-#
-# Clustering by sector#
-png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
-#pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)#
-treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,4,6)],#
-fontsize.labels=c(0, 26),   fontsize.title = 33,#
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland, their repartition by economic activity"),#
-	fontfamily.title = font, fontfamily.labels = font)#
-dev.off()
+dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
+	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
+	#browser()#
+	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
+}))
+dat

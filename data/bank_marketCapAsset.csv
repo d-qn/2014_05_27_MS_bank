@@ -1,0 +1,106 @@
+Bank,Country,US$b,Value,Rank
+Industrial & Commercial Bank of China (ICBC),China,3181.88,asset,1
+HSBC Holdings,UK,2758.45,asset,2
+China Construction Bank Corporation,China,2602.54,asset,3
+BNP Paribas,France,2589.19,asset,4
+Mitsubishi UFJ Financial Group (MUFG),Japan,2508.84,asset,5
+JP Morgan Chase & Co,US,2476.99,asset,6
+Agricultural Bank of China,China,2470.43,asset,7
+Bank of China,China,2435.49,asset,8
+Credit Agricole,France,2346.56,asset,9
+Barclays,UK,2266.82,asset,10
+Deutsche Bank,Germany,2250.64,asset,11
+Bank of America,US,2149.85,asset,12
+Japan Post Bank,Japan,1968.27,asset,13
+Citigroup Inc,US,1894.74,asset,14
+Societe Generale,France,1740.75,asset,15
+Mizuho Financial Group,Japan,1708.86,asset,16
+Royal Bank of Scotland Group,UK,1703.96,asset,17
+Banco Santander,Spain,1607.24,asset,18
+Sumitomo Mitsui Financial Group,Japan,1569.99,asset,19
+Groupe BPCE,France,1567.88,asset,20
+Wells Fargo,US,1546.71,asset,21
+Lloyds Banking Group,UK,1402.1,asset,22
+China Development Bank,China,1320.18,asset,23
+UniCredit S.p.A.,Italy,1157.41,asset,24
+UBS AG,Switzerland,1107.95,asset,25
+ING Bank N.V.,Netherlands,1107,asset,26
+Credit Suisse Group,Switzerland,990.178,asset,27
+Bank of Communications,China,964.071,asset,28
+Rabobank Group,Netherlands,927.085,asset,29
+Goldman Sachs Group,US,915.665,asset,30
+Postal Savings Bank of China,China,899.681,asset,31
+Credit Mutuel Group,France,887.31,asset,32
+Nordea Bank,Sweden,875.183,asset,33
+Intesa Sanpaolo,Italy,859.691,asset,34
+Morgan Stanley,US,831.381,asset,35
+BBVA,Spain,823.938,asset,36
+Toronto-Dominion Bank,Canada,811.284,asset,37
+Royal Bank of Canada,Canada,810.763,asset,38
+Norinchukin Bank,Japan,808.091,asset,39
+Commerzbank,Germany,789.734,asset,40
+National Australia Bank,Australia,783.419,asset,41
+Commonwealth Bank of Australia,Australia,724.42,asset,42
+Bank of Nova Scotia,Canada,716.536,asset,43
+China Merchants Bank,China,710.159,asset,44
+Australia & New Zealand Banking Group,Australia,683.225,asset,45
+Westpac Banking Corp,Australia,675.41,asset,46
+Standard Chartered Plc,UK,674.38,asset,47
+China CITIC Bank Corp,China,641.952,asset,48
+KfW Group,Germany,638.099,asset,49
+Industrial Bank Co. Ltd,China,611.581,asset,50
+Danske Bank,Denmark,610.533,asset,51
+Banco do Brasil SA,Brazil,607.227,asset,52
+Shanghai Pudong Development Bank,China,603.093,asset,53
+Sberbank Russia,Russia,537.519,asset,54
+ABN AMRO Group NV,Netherlands,536.744,asset,55
+Wells Fargo & Co,US,261.72,marketCap,1
+JP Morgan Chase & Co,US,229.9,marketCap,2
+Industrial & Commercial Bank of China (ICBC),China,196.21,marketCap,3
+HSBC Holdings,UK,191.43,marketCap,4
+Bank of America,US,181.77,marketCap,5
+China Construction Bank,China,160.83,marketCap,6
+Citigroup Inc,US,144.63,marketCap,7
+Agricultural Bank of China,China,126.41,marketCap,8
+Bank of China,China,115.92,marketCap,9
+Commonwealth Bank of Australia,Australia,115.35,marketCap,10
+Banco Santander,Spain,110.57,marketCap,11
+Allied Irish Banks plc,Ireland,104.81,marketCap,12
+Westpac Banking Corporation,Australia,99.22,marketCap,13
+BNP Paribas,France,96.03,marketCap,14
+Royal Bank of Canada,Canada,95.18,marketCap,15
+Lloyds Banking Group,UK,90.92,marketCap,16
+Toronto-Dominion Bank,Canada,86.49,marketCap,17
+Australia and New Zealand Banking (ANZ),Australia,83.25,marketCap,18
+Mitsubishi UFJ Financial Group (MUFG),Japan,78.45,marketCap,19
+US Bancorp,US,78.11,marketCap,20
+UBS AG,Switzerland,78.06,marketCap,21
+National Australia Bank,Australia,75.47,marketCap,22
+Goldman Sachs Group,US,74.18,marketCap,23
+Bank of Nova Scotia (Scotiabank),Canada,70.49,marketCap,24
+Itau Unibanco,Brazil,70.46,marketCap,25
+BBVA,Spain,69.59,marketCap,26
+Barclays,UK,63.24,marketCap,27
+Morgan Stanley,US,61.58,marketCap,28
+Sumitomo Mitsui Financial,Japan,59.14,marketCap,29
+Royal Bank of Scotland Group,UK,58.68,marketCap,30
+Banco Bradesco,Brazil,57.41,marketCap,31
+Nordea Bank,Sweden,55.2,marketCap,32
+UniCredit SpA,Italy,52.81,marketCap,33
+Standard Chartered,UK,51.58,marketCap,34
+Credit Suisse Group,Switzerland,51.51,marketCap,35
+Intesa Sanpaolo,Italy,50.84,marketCap,36
+Sberbank of Russia,Russia,49.26,marketCap,37
+Mizuho Financial Group,Japan,48.15,marketCap,38
+Societe Generale,France,47.62,marketCap,39
+PNC Financial Services,US,46.46,marketCap,40
+Deutsche Bank AG,Germany,45.69,marketCap,41
+Bank of Communications,China,45.15,marketCap,42
+Capital One Financial Corp,US,44.19,marketCap,43
+Bank of Montreal (BMO),Canada,43.2,marketCap,44
+Bank of New York Mellon Corp,US,40.06,marketCap,45
+China Merchants Bank,China,39.83,marketCap,46
+Credit Agricole SA,France,38.87,marketCap,47
+China Minsheng Banking Corp (CMBC),China,34.947,marketCap,48
+China Citic Bank,China,34.84,marketCap,49
+Charles Schwab Corp,US,35.49,marketCap,50

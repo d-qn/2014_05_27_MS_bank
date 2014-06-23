@@ -1,0 +1,31 @@
+Bank,Country,Market cap,type
+Wells Fargo & Co,US,261.72,bank
+JP Morgan Chase & Co,US,229.9,bank
+Industrial & Commercial Bank of China (ICBC),China,196.21,bank
+HSBC Holdings,UK,191.43,bank
+Bank of America,US,181.77,bank
+China Construction Bank,China,160.83,bank
+Citigroup Inc,US,144.63,bank
+Agricultural Bank of China,China,126.41,bank
+Bank of China,China,115.92,bank
+Commonwealth Bank of Australia,Australia,115.35,bank
+Banco Santander,Spain,110.57,bank
+Allied Irish Banks plc,Ireland,104.81,bank
+Westpac Banking Corporation,Australia,99.22,bank
+BNP Paribas,France,96.03,bank
+Royal Bank of Canada,Canada,95.18,bank
+Lloyds Banking Group,UK,90.92,bank
+Toronto-Dominion Bank,Canada,86.49,bank
+Australia and New Zealand Banking,Australia,83.25,bank
+Mitsubishi UFJ Financial Group,Japan,78.45,bank
+US Bancorp,US,78.11,bank
+UBS AG,Switzerland,78.06,bank
+National Australia Bank,Australia,75.47,bank
+Goldman Sachs Group,US,74.18,bank
+Bank of Nova Scotia,Canada,70.49,bank
+Itau Unibanco,Brazil,70.46,bank
+Apple,US,415.7,nonBank
+ExxonMobil,US,403.7,nonBank
+Roche,Switzerland,201.5,nonBank
+Nestle,Switzerland,233.8,nonBank
+Novartis,Switzerland,192.8,nonBank

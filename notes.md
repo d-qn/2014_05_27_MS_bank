@@ -41,6 +41,7 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
 * <http://www.swissbanking.org/fr/mobile/20131025-2400-vermoegensverwaltungsstudie_web-awe-rva.pdf>
 * <http://www.swissbanking.org/fr/mobile/facts_figures.htm>
 * [wealthmanagementp20](http://www.mediadesk.uzh.ch/articles/2013/schweizer-private-banking-kaempft-gegen-hohe-kosten/Private_Banking_Study_2013.pdf)
+* [worldBank Insurance and financial services data](http://data.worldbank.org/indicator/BX.GSR.INSF.ZS)
 
 #### SWI links
 
@@ -90,6 +91,9 @@ Les professions associées à une nationalité ne sont pas légion, tout le mond
 #####
 
 The term "private" refers to customer service rendered on a more personal basis than in mass-market retail banking, usually via dedicated bank advisers. It does not refer to a private bank, which is a non-incorporated banking institution.
+
+
+* <http://www.ft.com/intl/indepth/ft500> in 20013
 
 
 
