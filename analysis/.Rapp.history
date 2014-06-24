@@ -4,109 +4,184 @@ setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 #############################################################################################
 #
 source("~/swissinfo/_helpers/helpers.R")#
-font <- "Archivo Narrow"#
-#
-widthFig <- 640 * 2#
-heightFig <- widthFig * 2/3#
+font <- "Open Sans"#
 #
 #############################################################################################
 ### Market cap banks#
 #############################################################################################
 #
-library(quantmod)#
-banks <- c('WFC', 'UBS', 'CS', 'CNY')#
-getQuote(banks, what = yahooQF(c("Market Capitalization")))
+data <- read.csv("inkscape/banks_byMarketCapAndOthers.csv")#
+dat <- data[data$type == "bank",]#
+dat2 <- data[data$type != "bank",]#
+#
+dat$Bank <- reorder(dat$Bank, dat$Market.cap)#
+dat2$Bank <- reorder(factor(dat2$Bank), -dat2$Market.cap)#
+#
+data <- rbind(dat, data.frame( Bank = "A", Country = NA, Market.cap = 0, type = "bank"))#
+data <- rbind(data, dat2, data.frame( Bank = "A", Country = NA, Market.cap = 0, type = "bank"))
+max(data$Market.cap)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-mc <- read.csv("banks_byMarketCap.csv")#
-as <- read.csv("banks_byAsset.csv")
-mc
-as
+gridSize <- 100#
+y = seq(50, 400, by = gridSize)#
+scale.labs <- data.frame(             ## define scale labels#
+  x = rep(1, length(y)),#
+  y = y,#
+  labels = as.character(y)#
+)#
+scale.grid <- data.frame(            ## define grid for plot#
+  x = rep(1:(nlevels(factor(dat$Bank))), each = length(y)),     #
+  y = rep(gridSize, nlevels(factor(dat$Bank)) * length(y))#
+)#
+plot <- ggplot(data = dat, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = Country), stat ="identity", width = 1, color = "white") + #
+	ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") + #
+	geom_text(aes(y = Market.cap -15, label = Market.cap), hjust = 0.5, vjust = 2, size = 2, color="white") + #
+	theme(axis.text.x = element_text(#
+	   angle= 90 + (360 -5) / length(unique(dat$Bank)) * seq_along(dat$Bank)#
+	   )#
+	 ) + geom_bar(#
+	    data = scale.grid,              ## implement manual grid#
+	    aes(x = x, y = y, fill = NA), width = 1,#
+	    colour = "white", position = "stack", stat = "identity"#
+	) # +#
+# geom_text(#
+#     data = scale.labs, aes(x = x, y = y, label = labels, fill = NULL), size = 2.5#
+#     )
+plot
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-mc$Bank
-as$Bank
+ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") + #
+	geom_text(aes(y = Market.cap -15, label = Market.cap), hjust = 0.5, vjust = 2, size = 2, color="white") + #
+	theme(axis.text.x = element_text(#
+	   angle= 90 + (360 -5) / length(unique(dat$Bank)) * seq_along(dat$Bank)#
+	   )#
+	 ) + geom_bar(#
+	    data = scale.grid,              ## implement manual grid#
+	    aes(x = x, y = y, fill = NA), width = 1,#
+	    colour = "white", position = "stack", stat = "identity"#
+	) # +#
+# geom_text(#
+#     data = scale.labs, aes(x = x, y = y, label = labels, fill = NULL), size = 2.5#
+#     )
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-levels(mc$Bank) %in% levels(as$Bank)
+plot <- ggplot(data = data, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = Country), stat ="identity", width = 1, color = "white") + #
+	ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") + #
+	geom_text(aes(y = Market.cap -15, label = Market.cap), hjust = 0.5, vjust = 2, size = 2, color="white") + #
+	theme(axis.text.x = element_text(#
+	   angle= 90 + (360 -5) / length(unique(dat$Bank)) * seq_along(dat$Bank)#
+	   )#
+	 ) + geom_bar(#
+	    data = scale.grid,              ## implement manual grid#
+	    aes(x = x, y = y, fill = NA), width = 1,#
+	    colour = "white", position = "stack", stat = "identity"#
+	) # +#
+# geom_text(#
+#     data = scale.labs, aes(x = x, y = y, label = labels, fill = NULL), size = 2.5#
+#     )
+plot
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- read.csv("inkscape/banks_byMarketCapAndOthers.csv")#
+dat <- data[data$type == "bank",]#
+dat2 <- data[data$type != "bank",]#
+#
+dat$Bank <- reorder(dat$Bank, dat$Market.cap)#
+dat2$Bank <- reorder(factor(dat2$Bank), -dat2$Market.cap)#
+#
+data <- rbind(dat, data.frame( Bank = "A", Country = NA, Market.cap = 0, type = "bank"))#
+data <- rbind(data, dat2, data.frame( Bank = "B", Country = NA, Market.cap = 0, type = "bank"))#
+gridSize <- 100#
+y = seq(50, 400, by = gridSize)#
+scale.labs <- data.frame(             ## define scale labels#
+  x = rep(1, length(y)),#
+  y = y,#
+  labels = as.character(y)#
+)#
+scale.grid <- data.frame(            ## define grid for plot#
+  x = rep(1:(nlevels(factor(data$Bank))), each = length(y)),     #
+  y = rep(gridSize, nlevels(factor(data$Bank)) * length(y))#
+)#
+plot <- ggplot(data = data, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = Country), #
+	stat ="identity", width = 1, color = "white") + #
+	ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") + #
+	geom_text(aes(y = Market.cap -15, label = Market.cap), hjust = 0.5, vjust = 2, size = 2, color="white") + #
+	theme(axis.text.x = element_text(#
+	   angle= 90 + (360 -5) / length(unique(data$Bank)) * seq_along(data$Bank)#
+	   )#
+	 ) + geom_bar(#
+	    data = scale.grid,              ## implement manual grid#
+	    aes(x = x, y = y, fill = NA), width = 1,#
+	    colour = "white", position = "stack", stat = "identity"#
+	) # +#
+# geom_text(#
+#     data = scale.labs, aes(x = x, y = y, label = labels, fill = NULL), size = 2.5#
+#     )
+plot
+levels(data$Bank)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- read.csv("inkscape/banks_byMarketCapAndOthers.csv")#
+dat <- data[data$type == "bank",]#
+dat$Bank <- reorder(dat$Bank, dat$Market.cap)#
+gridSize <- 100#
+y = seq(50, 250, by = gridSize)#
+scale.labs <- data.frame(             ## define scale labels#
+  x = rep(1, length(y)),#
+  y = y,#
+  labels = as.character(y)#
+)#
+scale.grid <- data.frame(            ## define grid for plot#
+  x = rep(1:(nlevels(factor(dat$Bank))), each = length(y)),     #
+  y = rep(gridSize, nlevels(factor(dat$Bank)) * length(y))#
+)#
+plot <- ggplot(data = dat, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = Country), stat ="identity", width = 1, color = "white") + #
+	ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") + #
+	geom_text(aes(y = Market.cap -15, label = Market.cap), hjust = 0.5, vjust = 2, size = 2, color="white") + #
+	coord_(ylim = c(70, 500))+ #
+	theme(axis.text.x = element_text(#
+	   angle= 90 + (360 -5) / length(unique(dat$Bank)) * seq_along(dat$Bank)#
+	   )#
+	 ) + geom_bar(#
+	    data = scale.grid,              ## implement manual grid#
+	    aes(x = x, y = y, fill = NA), width = 1,#
+	    colour = "white", position = "stack", stat = "identity"#
+	) # +#
+# geom_text(#
+#     data = scale.labs, aes(x = x, y = y, label = labels, fill = NULL), size = 2.5#
+#     )
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- read.csv("inkscape/banks_byMarketCapAndOthers.csv")#
+dat <- data[data$type == "bank",]#
+dat$Bank <- reorder(dat$Bank, dat$Market.cap)#
+gridSize <- 100#
+y = seq(50, 250, by = gridSize)#
+scale.labs <- data.frame(             ## define scale labels#
+  x = rep(1, length(y)),#
+  y = y,#
+  labels = as.character(y)#
+)#
+scale.grid <- data.frame(            ## define grid for plot#
+  x = rep(1:(nlevels(factor(dat$Bank))), each = length(y)),     #
+  y = rep(gridSize, nlevels(factor(dat$Bank)) * length(y))#
+)#
+plot <- ggplot(data = dat, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = Country), stat ="identity", width = 1, color = "white") + #
+	ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") + #
+	geom_text(aes(y = Market.cap -15, label = Market.cap), hjust = 0.5, vjust = 2, size = 2, color="white") + #
+	theme(axis.text.x = element_text(#
+	   angle= 90 + (360 -5) / length(unique(dat$Bank)) * seq_along(dat$Bank)#
+	   )#
+	 ) + geom_bar(#
+	    data = scale.grid,              ## implement manual grid#
+	    aes(x = x, y = y, fill = NA), width = 1,#
+	    colour = "white", position = "stack", stat = "identity"#
+	) # +#
+# geom_text(#
+#     data = scale.labs, aes(x = x, y = y, label = labels, fill = NULL), size = 2.5#
+#     )
+plot
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 #############################################################################################
 ###		SETTINGS#
 #############################################################################################
 #
 source("~/swissinfo/_helpers/helpers.R")#
-font <- "Archivo Narrow"#
-#
-widthFig <- 640 * 2#
-heightFig <- widthFig * 2/3#
-#
-#############################################################################################
-### Market cap banks#
-#############################################################################################
-#
-data <- read.csv("bank_marketCapAsset_refined.csv")
-data
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-mc <- data[data$Value == "marketCap",]
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-as <- data[data$Value == "asset",]
-str(as)
-str(mc)
-as
-mc
-as
-levels(mc$Bank) %in% levels(as$Bank)
-levels(as$Bank) %in% levels(mc$Bank)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-mc$Bank <- factor(mc$Bank)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- read.csv("bank_marketCapAsset_refined.csv")#
-#
-mc <- data[data$Value == "marketCap",]#
-mc$Bank <- factor(mc$Bank)#
-as <- data[data$Value == "asset",]#
-as$Bank <- factor(as$Bank)
-levels(mc$Bank) %in% levels(as$Bank)
-head(as)
-head(mc)
-levels(mc$Bank)
-levels(as$Bank)
-mc$Bank %in% as$Bank
-mc[mc$Bank %in% as$Bank,]
-mc[!mc$Bank %in% as$Bank,]
-as$Bank %in% ms$Bank
-as$Bank %in% mc$Bank
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-dat <- mc[mc$Bank %in% as$Bank,]
-dat
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-match(dat$Bank, as$Bank)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-cbind(dat, as$Bank[match(dat$Bank, as$Bank),])
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-as$Bank[match(dat$Bank, as$Bank),]
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-as$Bank[match(dat$Bank, as$Bank),]
-as$Bank[match(dat$Bank, as$Bank)]
-as[match(dat$Bank, as$Bank),]
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-cbind(dat, as[match(dat$Bank, as$Bank),])
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-cbind(dat, asset = as[match(dat$Bank, as$Bank),'US.b'])
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-dat <- cbind(dat, asset = as[match(dat$Bank, as$Bank),'US.b'])
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-ggplot(data =dat) + geom_point(aes(`US.b`, asset, color = Country))
-(271 + 152) / 1350
-(155 - 174) / 174
-((155 - 174) / 174) * 100
-1085 / 2309
-1085 / 7227
-ggplot(data =dat) + geom_point(aes(`US.b`, asset, color = Country))
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-#############################################################################################
-###		SETTINGS#
-#############################################################################################
-#
-source("~/swissinfo/_helpers/helpers.R")#
-font <- "Archivo Narrow"#
+font <- "Open Sans"#
 #
 widthFig <- 640 * 2#
 heightFig <- widthFig * 2/3#
@@ -132,30 +207,7 @@ data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {
 png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
 #pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)#
 treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
-fontsize.labels=c(0, 29),   fontsize.title = 33,#
+fontsize.labels=c(0, 29),   fontsize.title = 33, border.lwds = c(2,3), border.col = "#efe9e0",#
 	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
 	fontfamily.title = font, fontfamily.labels = font)#
 dev.off()
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-ata.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
-data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
-#
-dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
-	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
-	#browser()#
-	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
-}))
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
-data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
-#
-dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
-	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
-	#browser()#
-	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
-}))
-dat

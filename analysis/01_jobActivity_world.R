@@ -3,7 +3,7 @@
 ############################################################################################
 
 source("~/swissinfo/_helpers/helpers.R")
-font <- "Archivo Narrow"
+font <- "Open Sans"
 
 widthFig <- 640 * 2
 heightFig <- widthFig * 2/3
