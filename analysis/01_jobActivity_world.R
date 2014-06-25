@@ -97,7 +97,7 @@ table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {
 	dddd
 }))
 countries_fullNames <- c('Australia', 'Austria', 'European Union (28 countries)', 'Ireland', 'Japan', 'Netherlands',
-	'China', 'Italy','Germany', 'France','Portugal','Spain','United Kingdom', 'Switzerland')
+	'Italy','Germany', 'France','Portugal','Spain','United Kingdom', 'Switzerland')
 
 table <- table[table$Country %in% countries_fullNames,]
 
@@ -120,20 +120,27 @@ write.table(table, "financeInGDP.csv", sep = ",")
 
 
 ###### Bank asset to GDP ########
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
-countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',
+data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)
+
+stopifnot(nrow(data.table1) == nrow(data.table2))
+
+countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',
 'United Kingdom', 'Switzerland', 'Russia')
 
-
-data.table<- data.table[data.table$Countries %in% countries_fullNames2,]
-
-dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {
-	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]
-	#browser()
-	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))
-}))
-
-write.table(table, "asset2GDP.csv", sep = ",")
+getLastdata <- function(d, colName) {
+	d <- d[d$Countries %in% countries_fullNames2,]
+	do.call(rbind, lapply( 1:nrow(d), function(i) {
+		res <- d[i,c(1,max(which(!is.na(d[i,]))))]
+		#browser()
+		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))
+		colnames(df)[2] <- colName
+		colnames(df)[3] <- paste('year', colName, sep = "_")
+		df
+	}))
+}
+dat <- cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table2, "asset per capita")[,2:3])
+write.table(dat, "assetByGDP_Capita.csv", sep = ",", row.names = F)
 
 
 
