@@ -1,409 +1,19 @@
+2800 / 600
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-#############################################################################################
-###		SETTINGS#
-#############################################################################################
-#
+treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-3],#
+	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 source("~/swissinfo/_helpers/helpers.R")#
 font <- "Open Sans"#
 #
-widthFig <- 640 * 2#
-heightFig <- widthFig * 2/3#
-#
-#############################################################################################
-### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
-#############################################################################################
-library(treemap)#
-#
-data.ch <- read.csv("laborsta2B_prod.csv")#
-#
-#Add line breaks#
-#
-data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
-	if(nchar(ac) > 30) {#
-		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
-	}	else {#
-		ac#
-	}#
-}))
-data
-str(data.ch)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- read.csv("inkscape/banks_byMarketCapAndOthers.csv")
-data
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS profits before tax Q1 2014", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP in 2012', #
-		'Switzerland total trade export')#
-	value = c(78.06, 1705, 1.68,  37.7, 631.173, 308.4)#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/en/about_ubs/investor_relations/quarterly_reporting/2014.html',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html')#
-	)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS profits before tax Q1 2014", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP in 2012', #
-		'Switzerland total trade export'),#
-	value = c(78.06, 1705, 1.68,  37.7, 631.173, 308.4),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/en/about_ubs/investor_relations/quarterly_reporting/2014.html',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html')#
-	)
-data
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS profits before tax Q1 2014", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP in 2012', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 1.68,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma'))#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/en/about_ubs/investor_relations/quarterly_reporting/2014.html',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS profits before tax Q1 2014", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP in 2012', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 1.68,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/en/about_ubs/investor_relations/quarterly_reporting/2014.html',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)
-data
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("group"), vSize="value",type="index", palette = swi_9palette[c(1,6,4)],#
-fontsize.labels=c(0, 29),   fontsize.title = 33, border.lwds = c(2,3), border.col = "#efe9e0",#
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("group"), vSize="value",type="index", palette = swi_9palette,#
-fontsize.labels=c(10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("what"), vSize="value",type="index", palette = swi_9palette,#
-fontsize.labels=c(10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("group", "what"), vSize="value",type="index", palette = swi_9palette,#
-fontsize.labels=c(10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("group", "what"), vSize="value",type="index", palette = swi_9palette,#
-fontsize.labels=c(0, 10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "what"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-paste(data$what, data$value)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-paste(data$what, data$value, sep = "\n$")
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS profits before tax Q1 2014", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP in 2012', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 1.68,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/en/about_ubs/investor_relations/quarterly_reporting/2014.html',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, "bn", sep = "")
-data
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS profits before tax Q1 2014", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP in 2012', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 1.68,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/en/about_ubs/investor_relations/quarterly_reporting/2014.html',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("group", "label"),#
-		vSize="value",type="index", palette = swi_9palette,#
-		fontsize.labels=c(0, 10),   fontsize.title = 12, border.lwds = c(3), border.col = "#efe9e0",#
-		fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data, index=c("group", "label"),#
-		vSize="value",type="index", palette = swi_9palette,#
-		fontsize.labels=c(0, 16),   fontsize.title = 0, border.lwds = c(4), border.col = "#efe9e0",#
-		fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 16),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS yearly profits before tax", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 4.1,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 16),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 16),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS yearly operating income", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market capitalisation', "UBS Private Banking's asset under management",  #
-		"UBS operating income", 'UBS loss due to subprime crisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\noperating income", 'UBS\nloss due to subprime crisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\noperating income", 'UBS\nloss due to\nsubprime crisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\noperating income", 'UBS\nloss due to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\noperating\nincome", 'UBS\nloss due to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\nyearly\noperating\nincome", 'UBS\nloss due to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\nyearly\noperating\nincome", 'UBS\nloss due to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 22),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\nyearly\noperating\nincome", 'UBS\nloss due to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n\n$",  data$value, " bn", sep = "")#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-widthFig <- 640 * 2#
-heightFig <- widthFig * 2/3
-heightFig
-widthFig
-960 / 640
-2/3
-3/2
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 widthFig <- 10#
 heightFig <- widthFig * 1.5
-heightFig
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-pdf(width = widthFig, height = heightFig, family = font)	#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)#
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)
-dev.off()
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-#############################################################################################
-###		SETTINGS#
-#############################################################################################
-#
-source("~/swissinfo/_helpers/helpers.R")#
-font <- "Open Sans"#
-#
-widthFig <- 10#
-heightFig <- widthFig * 1.5#
-#
-#############################################################################################
-### Create the data to visualize#
-#############################################################################################
-#
 data <- data.frame(#
 	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\nyearly\noperating\nincome", 'UBS\nloss due to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
+		"UBS\nyearly\noperating\nincome", 'UBS loss\ndue to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
 		'Switzerland total trade export', 'Global pharmaceuticals market'),#
 	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
 	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
@@ -413,77 +23,209 @@ data <- data.frame(#
 		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
 		'http://www.who.int/trade/glossary/story073/en/')#
 	)#
-data$label <- paste(data$what, "\n\n$",  data$value, " bn", sep = "")#
+data$label <- paste(data$what, "\n\n$",  data$value, " bn", sep = "")
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-3],#
+	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
+library(treemap)
+treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-3],#
+	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv", sep="\t")#
+colnames(data.table)[6] <- 'value'#
+data.table$value <- as.numeric(gsub(" +", "", as.character(data.table$value)))#
 #
-pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)	#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)#
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette,#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)#
-dev.off()
+# split the data by country and return the ratio of job in finance  for the latest year available#
+table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {#
+	cat("\n", as.character(dd[1,1]))#
+	year <- max(dd$Time)#
+	ddd <- dd[dd$Time == year,]#
+	#browser()#
+	dddd <- data.frame(Country = as.character(ddd[1,1]), year = year,#
+		total = ddd[ddd$Transaction == "Gross domestic product (output approach)",'value'],#
+		finance =ddd[ddd$Transaction == "Financial and insurance activities (ISIC rev4)",'value'])#
+#
+	dddd$ratio <- (dddd$finance / dddd$total) * 100#
+	dddd#
+}))
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-swi_9palette
+data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv", sep="\t")#
+colnames(data.table)[6] <- 'value'#
+data.table$value <- as.numeric(gsub(" +", "", as.character(data.table$value)))#
+#
+# split the data by country and return the ratio of job in finance  for the latest year available#
+table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {#
+	cat("\n", as.character(dd[1,1]))#
+	year <- max(dd$Time)#
+	ddd <- dd[dd$Time == year,]#
+	#browser()#
+	dddd <- data.frame(Country = as.character(ddd[1,1]), year = year,#
+		total = ddd[ddd$Transaction == "Gross domestic product (output approach)",'value'],#
+		finance =ddd[ddd$Transaction == "Financial and insurance activities (ISIC rev4)",'value'])#
+#
+	dddd$ratio <- (dddd$finance / dddd$total) * 100#
+	dddd#
+}))
+table
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)	#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)#
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font)#
-dev.off()
-?treemap
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
+str(data.table)
+str(data)
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c("top", "left"))
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
+#
+dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
+	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
+	#browser()#
+	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
+}))
+dat
+table
+data.table
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
+data.table
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
+#
+dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
+	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
+	#browser()#
+	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
+}))#
+#
+write.table(table, "asset2GDP.csv", sep = ",")
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)	#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c("top", "left"))#
-dev.off()
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
+#
+dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
+	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
+	#browser()#
+	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
+}))
+dat
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)	#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 18),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
-dev.off()
+write.table(dat, "asset2GDP.csv", sep = ",")
+dat
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)	#
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
-treemap(data[data$what == "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
-dev.off()
+write.table(dat, "asset2GDP.csv", sep = ",", row.names = F)
+data.table
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
+data.table
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')
+nrow(data.table)
+nrow(data.table2)
+data.table
+data.table2
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+stoopifnot(nrow(data.table) == nrow(data.table2))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+stopifnot(nrow(data.table) == nrow(data.table2))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+dat
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+#
+stopifnot(nrow(data.table1) == nrow(data.table2))#
+#
+countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+getLastdata(data.table1, "asset as % of GDP")
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+#
+stopifnot(nrow(data.table1) == nrow(data.table2))#
+#
+countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+#
+getLastdata <- function(d, colName) {#
+	dat <- d[d$Countries %in% countries_fullNames2,]#
+	do.call(rbind, lapply( 1:nrow(d), function(i) {#
+		res <- d[i,c(1,max(which(!is.na(d[i,]))))]#
+		#browser()#
+		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))#
+		colnames(df)[2] <- colName#
+		colnames(df)[3] <- paste('year', colName, sep = "_")#
+		df#
+	}))#
+}#
+getLastdata(data.table1, "asset as % of GDP")
+countries_fullNames2
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+#
+stopifnot(nrow(data.table1) == nrow(data.table2))#
+#
+countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+#
+getLastdata <- function(d, colName) {#
+	d <- d[d$Countries %in% countries_fullNames2,]#
+	do.call(rbind, lapply( 1:nrow(d), function(i) {#
+		res <- d[i,c(1,max(which(!is.na(d[i,]))))]#
+		#browser()#
+		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))#
+		colnames(df)[2] <- colName#
+		colnames(df)[3] <- paste('year', colName, sep = "_")#
+		df#
+	}))#
+}#
+getLastdata(data.table1, "asset as % of GDP")
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+getLastdata(data.table1, "asset as % of GDP")#
+getLastdata(data.table2, "asset per capita")
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+getLastdata(data.table1, "asset as % of GDP")#
+getLastdata(data.table2, "asset per capita")
+cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table1, "asset as % of GDP")[,2:3])
+cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table2, "asset per capita")[,2:3])
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
+data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+#
+stopifnot(nrow(data.table1) == nrow(data.table2))#
+#
+countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
+'United Kingdom', 'Switzerland', 'Russia')#
+#
+getLastdata <- function(d, colName) {#
+	d <- d[d$Countries %in% countries_fullNames2,]#
+	do.call(rbind, lapply( 1:nrow(d), function(i) {#
+		res <- d[i,c(1,max(which(!is.na(d[i,]))))]#
+		#browser()#
+		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))#
+		colnames(df)[2] <- colName#
+		colnames(df)[3] <- paste('year', colName, sep = "_")#
+		df#
+	}))#
+}#
+dat <- cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table2, "asset per capita")[,2:3])#
+write.table(dat, "assetByGDP_Capita.csv", sep = ",", row.names = F)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+write.table(dat, "assetByGDP_Capita.csv", sep = ",", row.names = F)
