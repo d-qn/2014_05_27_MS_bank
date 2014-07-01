@@ -1,231 +1,706 @@
-2800 / 600
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
+#############################################################################################
+###		SETTINGS#
+#############################################################################################
+#
+source("~/swissinfo/_helpers/helpers.R")#
+library(treemap)#
+font <- "Open Sans"#
+#
+widthFig <- 10#
+heightFig <- widthFig * 1.5#
+#
+#############################################################################################
+### Create the data to visualize#
+#############################################################################################
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS\nyearly\noperating\nincome", 'UBS loss\ndue to\nsubprime\ncrisis in 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/')#
+	)#
+data$label <- paste(data$what, "\n\n$ ",  data$value, " bn", sep = "")#
+#
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+source("~/swissinfo/_helpers/helpers.R")#
+library(treemap)#
+font <- "Open Sans"#
+#
+widthFig <- 10#
+heightFig <- widthFig * 1.5#
+#
+#############################################################################################
+### Create the data to visualize#
+#############################################################################################
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS\nyearly\noperating\nincome", 'UBS loss\ndue to\nsubprime\ncrisis in 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market', 'annual European Union budget'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300, 150.9 * 1.36),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma', 'continent')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/', 'http://europa.eu/pol/financ/index_en.htm')#
+	)#
+data$label <- paste(data$what, "\n\n$ ",  data$value, " bn", sep = "")#
+#
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+source("~/swissinfo/_helpers/helpers.R")#
+library(treemap)#
+font <- "Open Sans"#
+#
+widthFig <- 10#
+heightFig <- widthFig * 1.5#
+#
+#############################################################################################
+### Create the data to visualize#
+#############################################################################################
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS\nyearly\noperating\nincome", 'UBS loss\ndue to\nsubprime\ncrisis in 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market', 'annual European Union budget', 'Bangladesh annual GDP'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300, 150.9 * 1.36, 115.61),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma', 'continent', 'country2')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/', 'http://europa.eu/pol/financ/index_en.htm', 'World Bank')#
+	)#
+data$label <- paste(data$what, "\n\n$ ",  data$value, " bn", sep = "")
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2:3)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), force.print.labels = T)
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2:3)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
 	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2:3)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2:3)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS yearly operating\nincome", 'UBS loss\ndue to\nsubprime\ncrisis in 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market', 'annual European Union budget', 'Bangladesh annual GDP'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300, 150.9 * 1.36, 115.61),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma', 'continent', 'country2')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/', 'http://europa.eu/pol/financ/index_en.htm', 'World Bank')#
+	)#
+data$label <- paste(data$what, "\n\n$ ",  data$value, " bn", sep = "")#
+#
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}#
+#
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS yearly operating income", 'UBS loss\ndue to\nsubprime\ncrisis\nin 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market', 'European Union annual budget', 'Bangladesh annual GDP'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300, 150.9 * 1.36, 115.61),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma', 'continent', 'country2')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/', 'http://europa.eu/pol/financ/index_en.htm', 'World Bank')#
+	)#
+data$label <- paste(data$what, "\n\n$ ",  data$value, " bn", sep = "")#
+#
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS yearly operating income", 'UBS loss\ndue to\nsubprime\ncrisis\nin 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market', 'European Union annual budget', 'Bangladesh annual GDP'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300, 150.9 * 1.36, 115.61),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma', 'continent', 'country2')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/', 'http://europa.eu/pol/financ/index_en.htm', 'World Bank')#
+	)#
+data$label <- paste(data$what, "\n $",  data$value, " bn", sep = "")#
+#
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}#
+#
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data <- data.frame(#
+	what = c('UBS market\ncapitalisation', "UBS Private Banking's assets under management",#
+		"UBS yearly operating income", 'UBS loss\ndue to\nsubprime\ncrisis\nin 2008', 'Switzerland annual GDP',#
+		'Switzerland total trade export', 'Global pharmaceuticals market', 'European Union annual budget', 'Bangladesh annual GDP'),#
+	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300, 150.9 * 1.36, 115.61),#
+	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma', 'continent', 'country2')),#
+	source =#
+		c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013',#
+		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
+		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank',#
+		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
+		'http://www.who.int/trade/glossary/story073/en/', 'http://europa.eu/pol/financ/index_en.htm', 'World Bank')#
+	)#
+data$label <- paste(data$what, "\n $",  data$value, " bn", sep = "")#
+#
+whatpage <- "UBS Private Banking's assets under management"#
+balance <- data[data$what == whatpage,'value'] - sum(data[data$what != whatpage,'value'])#
+if(abs(balance) > 5) {#
+	stop("unbalanced values!\t", balance)#
+}#
+#
+pdf(file = "UBS_treemap.pdf", width = widthFig, height = heightFig, family = font)#
+treemap(data[data$what != whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title ="1", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+#
+treemap(data[data$what == whatpage,], index=c("group", "label"),#
+	vSize="value",type="index", palette = swi_9palette[-(2)],#
+	fontsize.labels=c(0, 16),   fontsize.title = 10, title = "2", border.lwds = c(3), border.col = "#efe9e0",#
+	fontfamily.title = font, fontfamily.labels = font, align.labels =  c( "left", "top"))#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
 source("~/swissinfo/_helpers/helpers.R")#
 font <- "Open Sans"#
 #
+font <- "Open Sans"#
 widthFig <- 10#
-heightFig <- widthFig * 1.5
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data <- data.frame(#
-	what = c('UBS market\ncapitalisation', "UBS Private Banking's asset under management",  #
-		"UBS\nyearly\noperating\nincome", 'UBS loss\ndue to\nsubprime\ncrisis in 2008', 'Switzerland GDP', #
-		'Switzerland total trade export', 'Global pharmaceuticals market'),#
-	value = c(78.06, 1705, 27.732,  37.7, 631.173, 308.4, 300),#
-	group = factor(c('market', 'market', 'market', 'market', 'country', 'country', 'pharma')),#
-	source = c('http://www.relbanks.com/worlds-top-banks/market-cap', 'Scorpio partnership private banking benchmark 2013', #
-		'http://www.ubs.com/global/de/about_ubs/investor_relations/annualreporting/2013/_jcr_content/par/teaserbox_6c86/teaser/linklist/link.644305709.file/bGluay9wYXRoPS9jb250ZW50L2RhbS9zdGF0aWMvZ2xvYmFsL2ludmVzdG9yX3JlbGF0aW9ucy9hbm51YWwyMDEzL0FubnVhbFJldmlldzIwMTMtZW4ucGRm/AnnualReview2013-en.pdf',#
-		'http://en.wikipedia.org/wiki/List_of_writedowns_due_to_subprime_crisis', 'World Bank', #
-		'https://www.cia.gov/library/publications/the-world-factbook/geos/sz.html',#
-		'http://www.who.int/trade/glossary/story073/en/')#
-	)#
-data$label <- paste(data$what, "\n\n$",  data$value, " bn", sep = "")
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
-library(treemap)
-treemap(data[data$what != "UBS Private Banking's asset under management",], index=c("group", "label"),#
-	vSize="value",type="index", palette = swi_9palette[-3],#
-	fontsize.labels=c(0, 15),   fontsize.title = 0, border.lwds = c(3), border.col = "#efe9e0",#
-	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv", sep="\t")#
-colnames(data.table)[6] <- 'value'#
-data.table$value <- as.numeric(gsub(" +", "", as.character(data.table$value)))#
+heightFig <- widthFig * 1.5#
 #
-# split the data by country and return the ratio of job in finance  for the latest year available#
-table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {#
-	cat("\n", as.character(dd[1,1]))#
-	year <- max(dd$Time)#
-	ddd <- dd[dd$Time == year,]#
-	#browser()#
-	dddd <- data.frame(Country = as.character(ddd[1,1]), year = year,#
-		total = ddd[ddd$Transaction == "Gross domestic product (output approach)",'value'],#
-		finance =ddd[ddd$Transaction == "Financial and insurance activities (ISIC rev4)",'value'])#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
 #
-	dddd$ratio <- (dddd$finance / dddd$total) * 100#
-	dddd#
-}))
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("SNA_TABLE1_Data_84542764-4f5f-4898-8095-77a64a35c7d7.tsv", sep="\t")#
-colnames(data.table)[6] <- 'value'#
-data.table$value <- as.numeric(gsub(" +", "", as.character(data.table$value)))#
+data.ch <- read.csv("laborsta2B_prod.csv")#
 #
-# split the data by country and return the ratio of job in finance  for the latest year available#
-table <- do.call(rbind, by(data.table, data.table$Country, function(dd) {#
-	cat("\n", as.character(dd[1,1]))#
-	year <- max(dd$Time)#
-	ddd <- dd[dd$Time == year,]#
-	#browser()#
-	dddd <- data.frame(Country = as.character(ddd[1,1]), year = year,#
-		total = ddd[ddd$Transaction == "Gross domestic product (output approach)",'value'],#
-		finance =ddd[ddd$Transaction == "Financial and insurance activities (ISIC rev4)",'value'])#
+#Add line breaks#
 #
-	dddd$ratio <- (dddd$finance / dddd$total) * 100#
-	dddd#
-}))
-table
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
-str(data.table)
-str(data)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
-data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
-#
-dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
-	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
-	#browser()#
-	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
-}))
-dat
-table
-data.table
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
-data.table
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
-data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
-#
-dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
-	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
-	#browser()#
-	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 30) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
 }))#
 #
-write.table(table, "asset2GDP.csv", sep = ",")
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 33, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-countries_fullNames2 <- c('Australia', 'Austria', 'Ireland', 'Japan', "USA", 'Italy','Germany', 'France','Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
-data.table<- data.table[data.table$Countries %in% countries_fullNames2,]#
+data.ch <- read.csv("laborsta2B_prod.csv")#
 #
-dat <- do.call(rbind, lapply( 1:nrow(data.table), function(i) {#
-	res <- data.table[i,c(1,max(which(!is.na(data.table[i,]))))]#
-	#browser()#
-	data.frame(country = res[1,1], value = res[1,2], year = gsub("^X", "", names(res)[2]))#
-}))
-dat
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-write.table(dat, "asset2GDP.csv", sep = ",")
-dat
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-write.table(dat, "asset2GDP.csv", sep = ",", row.names = F)
-data.table
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
-data.table
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
-countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')
-nrow(data.table)
-nrow(data.table2)
-data.table
-data.table2
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-stoopifnot(nrow(data.table) == nrow(data.table2))
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-stopifnot(nrow(data.table) == nrow(data.table2))
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-dat
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+#Add line breaks#
 #
-stopifnot(nrow(data.table1) == nrow(data.table2))#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 20) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
 #
-countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-getLastdata(data.table1, "asset as % of GDP")
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 15) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+data.ch <- read.csv("laborsta2B_prod.csv")#
 #
-stopifnot(nrow(data.table1) == nrow(data.table2))#
+#Add line breaks#
 #
-countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 10) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
 #
-getLastdata <- function(d, colName) {#
-	dat <- d[d$Countries %in% countries_fullNames2,]#
-	do.call(rbind, lapply( 1:nrow(d), function(i) {#
-		res <- d[i,c(1,max(which(!is.na(d[i,]))))]#
-		#browser()#
-		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))#
-		colnames(df)[2] <- colName#
-		colnames(df)[3] <- paste('year', colName, sep = "_")#
-		df#
-	}))#
-}#
-getLastdata(data.table1, "asset as % of GDP")
-countries_fullNames2
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"))#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+data.ch <- read.csv("laborsta2B_prod.csv")#
 #
-stopifnot(nrow(data.table1) == nrow(data.table2))#
+#Add line breaks#
 #
-countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 10) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
 #
-getLastdata <- function(d, colName) {#
-	d <- d[d$Countries %in% countries_fullNames2,]#
-	do.call(rbind, lapply( 1:nrow(d), function(i) {#
-		res <- d[i,c(1,max(which(!is.na(d[i,]))))]#
-		#browser()#
-		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))#
-		colnames(df)[2] <- colName#
-		colnames(df)[3] <- paste('year', colName, sep = "_")#
-		df#
-	}))#
-}#
-getLastdata(data.table1, "asset as % of GDP")
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-getLastdata(data.table1, "asset as % of GDP")#
-getLastdata(data.table2, "asset per capita")
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-getLastdata(data.table1, "asset as % of GDP")#
-getLastdata(data.table2, "asset per capita")
-cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table1, "asset as % of GDP")[,2:3])
-cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table2, "asset per capita")[,2:3])
-setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)#
-data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)#
+data.ch <- read.csv("laborsta2B_prod.csv")#
 #
-stopifnot(nrow(data.table1) == nrow(data.table2))#
+#Add line breaks#
 #
-countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',#
-'United Kingdom', 'Switzerland', 'Russia')#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 10) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
 #
-getLastdata <- function(d, colName) {#
-	d <- d[d$Countries %in% countries_fullNames2,]#
-	do.call(rbind, lapply( 1:nrow(d), function(i) {#
-		res <- d[i,c(1,max(which(!is.na(d[i,]))))]#
-		#browser()#
-		df <- data.frame(country = res[1,1], res = res[1,2], year = gsub("^X", "", names(res)[2]))#
-		colnames(df)[2] <- colName#
-		colnames(df)[3] <- paste('year', colName, sep = "_")#
-		df#
-	}))#
-}#
-dat <- cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table2, "asset per capita")[,2:3])#
-write.table(dat, "assetByGDP_Capita.csv", sep = ",", row.names = F)
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), force.print.labels = T)#
+dev.off()
 setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
-write.table(dat, "assetByGDP_Capita.csv", sep = ",", row.names = F)
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 10) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), force.print.labels = T)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+# data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+# 	if(nchar(ac) > 10) {#
+# 		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+# 	}	else {#
+# 		ac#
+# 	}#
+# }))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 8) {#
+		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 15) {#
+		gsub('(.{1,15})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 29),   fontsize.title = 12, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 15) {#
+		gsub('(.{1,15})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 24),   fontsize.title = 16, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 15) {#
+		gsub('(.{1,15})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 24),   fontsize.title = 16, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 18) {#
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 24),   fontsize.title = 16, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, align.labels = c( "left", "top"), overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+source("~/swissinfo/_helpers/helpers.R")#
+font <- "Open Sans"#
+#
+font <- "Open Sans"#
+widthFig <- 10#
+heightFig <- widthFig * 1.5#
+#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 18) {#
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 24),   fontsize.title = 22, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font, overlap.labels = 1)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 18) {#
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 24),   fontsize.title = 22, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+#############################################################################################
+###		SETTINGS#
+#############################################################################################
+#
+source("~/swissinfo/_helpers/helpers.R")#
+font <- "Open Sans"#
+#
+font <- "Open Sans"#
+widthFig <- 10#
+heightFig <- widthFig * 1.5#
+#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 18) {#
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 24),   fontsize.title = 20, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 18) {#
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 18),   fontsize.title = 22, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font)#
+dev.off()
+setwd('/Users/nguyendu/Google Drive/swissinfo/2014_05_27_MS_bank/analysis')
+source("~/swissinfo/_helpers/helpers.R")#
+font <- "Open Sans"#
+#
+font <- "Open Sans"#
+widthFig <- 10#
+heightFig <- widthFig * 1.5#
+#
+#############################################################################################
+### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by#
+#############################################################################################
+library(treemap)#
+#
+data.ch <- read.csv("laborsta2B_prod.csv")#
+#
+#Add line breaks#
+#
+data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {#
+	if(nchar(ac) > 18) {#
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)#
+	}	else {#
+		ac#
+	}#
+}))#
+#
+# Clustering by sector#
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)#
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)#
+treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],#
+fontsize.labels=c(0, 18),   fontsize.title = 20, border.lwds = c(2,3), border.col = "#efe9e0",#
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),#
+	fontfamily.title = font, fontfamily.labels = font)#
+dev.off()

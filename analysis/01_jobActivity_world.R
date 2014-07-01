@@ -5,8 +5,9 @@
 source("~/swissinfo/_helpers/helpers.R")
 font <- "Open Sans"
 
-widthFig <- 640 * 2
-heightFig <- widthFig * 2/3
+font <- "Open Sans"
+widthFig <- 10
+heightFig <- widthFig * 1.5
 
 ############################################################################################
 ### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by
@@ -18,19 +19,19 @@ data.ch <- read.csv("laborsta2B_prod.csv")
 #Add line breaks
 
 data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {
-	if(nchar(ac) > 30) {
-		gsub('(.{1,30})(\\s|$)', '\\1\n', ac)
+	if(nchar(ac) > 18) {
+		gsub('(.{1,18})(\\s|$)', '\\1\n', ac)
 	}	else {
 		ac
 	}
 }))
 
 # Clustering by sector
-png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)
-#pdf("jobActivityCH_treemap.pdf", width = 13, height = 10, pointsize = 14)
+#png("jobActivityCH_treemap.png", width = widthFig, height = heightFig)
+pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)
 treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],
-fontsize.labels=c(0, 29),   fontsize.title = 33, border.lwds = c(2,3), border.col = "#efe9e0",
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "millions of job in Switzerland their repartition by economic activity"),
+fontsize.labels=c(0, 18),   fontsize.title = 20, border.lwds = c(2,3), border.col = "#efe9e0",
+	title = paste(round(sum(data.ch$Job) / 1000, 1), "million of jobs in Switzerland their repartition by economic activity"),
 	fontfamily.title = font, fontfamily.labels = font)
 dev.off()
 
@@ -63,15 +64,15 @@ table$color <- 'a'
 table[table$COUNTRY=="Switzerland",'color'] <- 'b'
 
 
-png("jobInFinance_bar.png", width = widthFig, height = heightFig)
-p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
-	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +
-	theme(legend.position = "none", panel.border = element_blank())
-p1
-dev.off()
+# png("jobInFinance_bar.png", width = widthFig, height = heightFig)
+# p1 <- ggplot(table, aes(x = COUNTRY, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
+# 	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
+# 	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +
+# 	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
+# 	ylab("Percentage of the total job in financial services (bank, pension funds, insurance, ...)") +
+# 	theme(legend.position = "none", panel.border = element_blank())
+# p1
+# dev.off()
 
 write.table(table, "jobInFinance.csv", sep = ",")
 
@@ -106,15 +107,15 @@ table$Country <- reorder(table$Country, table$rratio)
 table$color <- 'a'
 table[table$Country=="Switzerland",'color'] <- 'b'
 
-png("financeInGDP_bar.png", width = widthFig, height = heightFig)
-p2 <- ggplot(table, aes(x = Country, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
-	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
-	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +
-	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
-	ylab("Contribution of the financial sector to the total GDP (output method) in %") +
-	theme(legend.position = "none", panel.border = element_blank())
-p2
-dev.off()
+# png("financeInGDP_bar.png", width = widthFig, height = heightFig)
+# p2 <- ggplot(table, aes(x = Country, y =  rratio)) + geom_bar(stat = "identity", aes(fill = color)) +
+# 	ggtheme_xgrid + coord_flip ()+ scale_fill_manual(values = swi_22palette[c(3,9)]) +
+# 	theme(text=element_text(family=font , size = 35), axis.ticks.y = element_blank()) + xlab("") +
+# 	geom_text(data=table,aes(label=format(rratio)), hjust=1.5, size = 7.7, color = "#efe9e0", family = font) +
+# 	ylab("Contribution of the financial sector to the total GDP (output method) in %") +
+# 	theme(legend.position = "none", panel.border = element_blank())
+# p2
+# dev.off()
 
 write.table(table, "financeInGDP.csv", sep = ",")
 
@@ -122,8 +123,9 @@ write.table(table, "financeInGDP.csv", sep = ",")
 ###### Bank asset to GDP ########
 data.table1 <- read.csv("../data/Bank Assets (As % Of GDP).csv", sep=",", stringsAsFactors = F)
 data.table2 <- read.csv("../data/Bank Assets Per Capita (USD).csv", sep=",", stringsAsFactors = F)
+data.table3 <- read.csv("../data/Bank Assets (USD).csv", sep=",", stringsAsFactors = F)
 
-stopifnot(nrow(data.table1) == nrow(data.table2))
+stopifnot(nrow(data.table1) == nrow(data.table2), nrow(data.table1) == nrow(data.table3))
 
 countries_fullNames2 <- c('Ireland', 'Japan', "USA", 'Italy','Germany', 'France', 'Portugal','Spain',
 'United Kingdom', 'Switzerland', 'Russia')
@@ -139,48 +141,8 @@ getLastdata <- function(d, colName) {
 		df
 	}))
 }
-dat <- cbind(getLastdata(data.table1, "asset as % of GDP"), getLastdata(data.table2, "asset per capita")[,2:3])
-write.table(dat, "assetByGDP_Capita.csv", sep = ",", row.names = F)
-
-
-
-############################################################################################
-### Bank capital to assets ratio : WDI FB.BNK.CAPA.ZS
-############################################################################################
-# The ratio of capital to assets measures bank solvency and resiliency— and the extent to which banks can deal with unexpected losses. With banks under stress in the global financial crisis, the likelihood and cost of bank failures led countries to review their banking regulations. Many major economies have required higher minimum capital ratios to ensure bank capacity to cover liabilities and protect depositors and other lenders. In the United States the average ratio of capital to assets rose to 11.2 percent in 2011, up from 9.3 percent in 2008. Also maintaining higher ratios were euro area countries (6.7 percent) and the United Kingdom (5.1 percent). Japan and Germany, by con- trast, kept rates below 5 percent because of their banking conditions.
-
-#
-# library(WDI)
-#
-# countries.iso2 <- c('AT', "CH", "DE", "GR", "ES", "FR", "IT", "PT", "GB", "US", 'JP', 'BR', 'RU', 'CN')
-#
-#
-# bankRatio <- WDI(country = c(countries.iso2), indicator = "FB.BNK.CAPA.ZS",
-#   start = 1991,  end = 2012, extra = FALSE, cache = NULL)
-#
-# #Clean up the data a bit
-# bankRatio <- rename(bankRatio, replace = c("SL.UEM.1524.ZS" = "unemployment"))
-# bankRatio$unemployment <- round(bankRatio$unemployment, 1)
-#
-#
-# # Create the chart
-# bankRatioPlot <- nPlot(
-# 	unemployment ~ year,
-# 	data = bankRatio,
-# 	group = "country",
-# 	type = "lineChart")
-#
-# # Add axis labels and format the tooltip
-# bankRatioPlot$yAxis(axisLabel = "Youth (age 15-24) unemployement in %", width = 55)
-# bankRatioPlot$xAxis(axisLabel = "Year")
-# bankRatioPlot$chart(tooltipContent = "#! function(key, x, y){
-#       return '<h3>' + key + '</h3>' +
-#       '<p>' + y + ' in ' + x + '</p>'
-#       } !#")
-# ids <- unique(bankRatio$iso2c)
-# country.selec <- as.logical(!ids %in% c('AT','CH','DE','ES','PT','GB', 'GR'))
-# bankRatioPlot$set(disabled = country.selec)
-# bankRatioPlot$publish("line chart World Bank youth unemployment", host = "rpubs")
-# bankRatioPlot
+dat <- cbind(getLastdata(data.table1, "assets as % of GDP"), getLastdata(data.table2, "assets per capita [USD millions]")[,2:3],
+ getLastdata(data.table3, "assets [USD billions]")[,2:3] )
+write.table(dat, "assetByGDP_Capita_abs.csv", sep = ",", row.names = F)
 
 
