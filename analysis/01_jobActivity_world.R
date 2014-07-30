@@ -3,18 +3,16 @@
 ############################################################################################
 
 source("~/swissinfo/_helpers/helpers.R")
-font <- "Open Sans"
 
-font <- "Open Sans"
 widthFig <- 10
-heightFig <- widthFig * 1.5
+heightFig <- widthFig * 1.4
 
 ############################################################################################
 ### Treemap of the jobs in switzerland: colored by sectors, area by number, hue by
 ############################################################################################
 library(treemap)
 
-data.ch <- read.csv("laborsta2B_prod.csv")
+data.ch <- read.csv("laborsta2B_prod_cleaned.csv")
 
 #Add line breaks
 
@@ -31,7 +29,7 @@ data.ch$Activity <- factor(sapply(as.character(data.ch$Activity), function(ac) {
 pdf("jobActivityCH_treemap.pdf", width = widthFig, height = heightFig, pointsize = 14)
 treemap(data.ch, index=c("Sector", "Activity"), vSize="Job",type="index", palette = swi_9palette[c(1,6,4)],
 fontsize.labels=c(0, 18),   fontsize.title = 20, border.lwds = c(2,3), border.col = "#efe9e0",
-	title = paste(round(sum(data.ch$Job) / 1000, 1), "million of jobs in Switzerland their repartition by economic activity"),
+	title = paste("Distribution of Switzerland's", round(sum(data.ch$Job) / 1000, 1), "million jobs by economic activity"),
 	fontfamily.title = font, fontfamily.labels = font)
 dev.off()
 

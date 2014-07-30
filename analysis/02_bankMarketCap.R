@@ -3,7 +3,9 @@
 ############################################################################################
 
 source("~/swissinfo/_helpers/helpers.R")
-font <- "Archivo Narrow"
+
+widthFig <- 10
+heightFig <- widthFig * 1.35
 
 ############################################################################################
 ### Market cap banks
@@ -12,7 +14,6 @@ font <- "Archivo Narrow"
 data <- read.csv("inkscape/banks_byMarketCapAndOthers.csv")
 dat <- data[data$type == "bank",]
 dat$Bank <- reorder(dat$Bank, dat$Market.cap)
-
 
 gridSize <- 100
 y = seq(50, 250, by = gridSize)
@@ -25,8 +26,6 @@ scale.grid <- data.frame(            ## define grid for plot
   x = rep(1:(nlevels(factor(dat$Bank))), each = length(y)),
   y = rep(gridSize, nlevels(factor(dat$Bank)) * length(y))
 )
-
-
 
 plot <- ggplot(data = dat, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = Country), stat ="identity", width = 1, color = "white") +
 	ggtheme + scale_fill_manual(values = swi_22palette[-c(2,3)]) +  coord_polar(direction = -1) + xlab("") + ylab("") +
@@ -44,7 +43,7 @@ plot <- ggplot(data = dat, aes(x = Bank, y = Market.cap)) + geom_bar(aes(fill = 
 #     )
 #
 
-pdf("marketCap.pdf",  width = 16, height = 16, family = font)
+pdf("marketCap.pdf",  width = widthFig, height = heightFig, family = font)
 print(plot)
 dev.off()
 
